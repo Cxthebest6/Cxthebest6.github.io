@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			 *{
+			 	margin: 0;
+			 	padding: 0;
+			 }
+			 .btn1-enter,.btn1-leave-to{
+			 	opacity: 0;
+			 	top: 120px !important;
+			 }
+			 .btn1-enter-active,.btn1-leave-active{
+			 	transition: all .3s;
+			 }
+			 
+			  .btn2-enter,.btn2-leave-to{
+			 	opacity: 0;
+			 	left: -120px !important;
+			 }
+			 .btn2-enter-active,.btn2-leave-active{
+			 	transition: all .3s;
+			 }
+			 
+			 .btn3-enter,.btn3-leave-to{
+			 	opacity: 0;
+			 	top: 120px !important;
+			 }
+			 .btn3-enter-active,.btn3-leave-active{
+			 	transition: all .3s;
+			 }
+			 .ofirst{
+				 line-height:50px;text-align: center;background: #000000;color: #FFFFFF;
+			 }
+			 .osencond{
+				 position: absolute;top:50px;left: 0;width: 100%;background: #000;z-index: 2;
+			 }
+			 .osbox{
+				 color: #FFFFFF;line-height: 50px;text-align: center;position: relative;
+			 }
+			 .sbox{
+				 position: absolute;top: 0;right: 42px;
+			 }
+			 .oback{
+				 position: absolute;top: 50px;left: 0;width: 100%;background: #000;
+			 }
+			 .oreturn{
+				 color: #FFFFFF;line-height: 50px;text-align: center;position: relative;
+			 }
+			 .om{
+				 color: #FFFFFF;line-height: 50px;text-align: center;position: relative;
+			 }
+		</style>
+	</head>
+
+	<body>
+		<div id="box" >
+		     <ofirst></ofirst>
+		</div>
+		<template id="ofirst">
+			<div style="position: relative;">
+				<div class="ofirst" @click="obtn_1">
+					  首页
+				</div>
+				<transition :name="donghua">
+				<div class="osencond"  v-show="obtn1">
+				      <div v-for="i in arr" class="osbox">
+				      	 {{i.title}}  <span class="sbox" v-if="i.arr.length" @click="obtn_2(i.arr)">></span>
+				      </div>
+				</div>
+				</transition>
+				<transition name="btn3">
+				<div class="oback" v-show="obtn2">
+					 <div class="oreturn" @click="ochangge">
+				      	返回上一级  
+				      </div>
+				      <div v-for="i in oarr" class="om">
+				      	 {{i}}  
+				      </div>
+				</div>
+				</transition>
+			</div>
+		</template>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		Vue.component('ofirst', {
+			template: '#ofirst',
+			data(){
+				return {
+					obtn1:false,
+					obtn2:false,	
+					arr:[
+					{title:'首页',arr:[]},
+					{title:'手机',arr:['小米','华为']},
+					{title:'电视',arr:['海信']},
+					{title:'其他',arr:[]},
+					],
+					donghua:'btn1',
+					oarr:'',
+				}
+			},
+			methods:{
+				obtn_1(){
+					
+					if(this.obtn2){
+						this.obtn2 = false
+					}else{
+						this.donghua = 'btn1'
+					this.obtn1 = !this.obtn1 
+					}
+				},
+				obtn_2(arr){
+					this.donghua = 'btn2'
+					this.obtn1 = false
+					this.oarr = arr
+					setTimeout(()=>{
+						this.obtn2=true
+					},300)
+				},
+				ochangge(){
+					this.obtn2=false
+					this.obtn1 = true
+				}
+			}
+			
+		})
+     
+     
+		new Vue({
+			el: "#box"
+		})
+	</script>
+
+</html>

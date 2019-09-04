@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;list-style-type: none;text-decoration: none;}
+			[v-cloak] {
+				display: none;
+			}
+			.container{
+				width: 800px;
+				height: 800px;
+				margin: 0 auto;
+				position: relative;
+			}
+			.oimgbox{
+				width: 800px;
+				position: absolute;
+				top:0;
+				left:0;
+				
+			}
+			.ofirst-enter-active{
+				transition: all 1.5s;
+			}
+			/* 隐藏到显示前 */
+			.ofirst-enter{
+				left: -800px !important;
+				opacity: 0;
+			}
+			/*显示到隐藏时*/
+			.ofirth-leave-active{
+				transition: all 1.5s;
+			}
+			.ofirst-leave-to{
+				opacity: 0;
+				left: 800px !important;
+			}
+			/*隐藏到显示前*/
+			.osecond-enter{
+				left: 800px !important;
+				opacity: 0;
+			}
+			/*隐藏到显示时*/
+			.osecond-enter-active{
+				transition: all 1.5;
+			}
+			/*显示到隐藏时*/
+			.osecond-leave-active{
+				transition: all 1.5s;
+			}
+			.osecond-leave-to{
+				opacity: 0;
+				left: -800px !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" v-cloak>
+			<ofirst style="text-align: center;"></ofirst>
+		</div>
+		<template id="ofirst">
+			<div>
+				<button type="button" @click="btn2">上一张</button>
+				{{num}}
+				<button type="button" @click="btn1">下一张</button>
+				<div class="container" style="">
+					<transition :name="o_type" v-for="(i,$index) in arr">
+						<div class="oimgbox"  v-show="num==$index">
+							<img :src="i" style="width: 800px;"/>
+						</div>	
+				</transition>
+				</div>
+			</div>
+		</template>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component('ofirst',{
+			template:'#ofirst',
+				data(){
+					return{
+						num:0,
+						o_type:'ofirst',
+						arr:['http://img0.imgtn.bdimg.com/it/u=2170471332,2876025556&fm=26&gp=0.jpg',
+						'http://img2.imgtn.bdimg.com/it/u=3231174743,2365448005&fm=26&gp=0.jpg',
+						'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=849609543,4082975644&fm=26&gp=0.jpg',
+						'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3153368503,3397836459&fm=26&gp=0.jpg'
+						]
+					}
+				},
+				methods:{
+					btn1(){
+						this.o_type='ofirst'
+						this.num++
+						if(this.num>3){
+							this.num=0
+						}
+					},
+					btn2(){
+						this.o_type='osecond'
+						this.num--
+						if(this.num<0){
+							this.num=3
+						}
+					}
+				}
+				
+		})
+		new Vue({
+			el:'#box'
+		})
+	</script>
+</html>

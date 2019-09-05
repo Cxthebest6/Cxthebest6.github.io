@@ -10,8 +10,8 @@
 			}
 			.container{
 				width: 800px;
-				height: 800px;
 				margin: 0 auto;
+				height: 800px;
 				position: relative;
 			}
 			.oimgbox{
@@ -21,22 +21,23 @@
 				left:0;
 				
 			}
-			.ofirst-enter-active{
-				transition: all 1.5s;
-			}
-			/* 隐藏到显示前 */
+			/*隐藏到显示前*/
 			.ofirst-enter{
 				left: -800px !important;
 				opacity: 0;
 			}
-			/*显示到隐藏时*/
-			.ofirth-leave-active{
-				transition: all 1.5s;
+			/*隐藏到显示时*/
+			.ofirst-enter-active{
+				transition: all 1s;
+			}
+			.ofirst-leave-active{
+				transition: all 1s; 
 			}
 			.ofirst-leave-to{
 				opacity: 0;
 				left: 800px !important;
 			}
+			
 			/*隐藏到显示前*/
 			.osecond-enter{
 				left: 800px !important;
@@ -44,11 +45,11 @@
 			}
 			/*隐藏到显示时*/
 			.osecond-enter-active{
-				transition: all 1.5;
+				transition: all 1s;
 			}
 			/*显示到隐藏时*/
 			.osecond-leave-active{
-				transition: all 1.5s;
+				transition: all 1s;
 			}
 			.osecond-leave-to{
 				opacity: 0;
@@ -63,7 +64,6 @@
 		<template id="ofirst">
 			<div>
 				<button type="button" @click="btn2">上一张</button>
-				{{num}}
 				<button type="button" @click="btn1">下一张</button>
 				<div class="container" style="">
 					<transition :name="o_type" v-for="(i,$index) in arr">
@@ -83,8 +83,8 @@
 					return{
 						num:0,
 						o_type:'ofirst',
-						arr:['http://img0.imgtn.bdimg.com/it/u=2170471332,2876025556&fm=26&gp=0.jpg',
-						'http://img2.imgtn.bdimg.com/it/u=3231174743,2365448005&fm=26&gp=0.jpg',
+						arr:['http://img5.imgtn.bdimg.com/it/u=613684344,3099144659&fm=26&gp=0.jpg',
+						'http://img0.imgtn.bdimg.com/it/u=2744847420,3524890642&fm=26&gp=0.jpg',
 						'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=849609543,4082975644&fm=26&gp=0.jpg',
 						'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3153368503,3397836459&fm=26&gp=0.jpg'
 						]
